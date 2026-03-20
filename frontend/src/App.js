@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+// Configure backend URL - use environment variable or default to localhost
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+
 function App() {
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState([]);
@@ -8,17 +11,34 @@ function App() {
   const [echoResult, setEchoResult] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [backendStatus, setBackendStatus] = useState('checking...');
 
   // Fetch hello message on mount
   useEffect(() => {
     fetchHello();
+    checkBackendStatus();
   }, []);
+
+  const checkBackendStatus = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/hello`, {
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        setBackendStatus(`✓ Connected to backend`);
+      } else {
+        setBackendStatus('⚠ Backend connection issue');
+      }
+    } catch (err) {
+      setBackendStatus(`✗ Backend unavailable`);
+    }
+  };
 
   const fetchHello = async () => {
     try {
       setLoading(true);
       setError('');
-      const response = await fetch('/api/hello');
+      const response = await fetch(`${BACKEND_URL}/api/hello`);
       if (!response.ok) throw new Error('Failed to fetch message');
       const data = await response.json();
       setMessage(data.message);
@@ -33,7 +53,7 @@ function App() {
     try {
       setLoading(true);
       setError('');
-      const response = await fetch('/api/users');
+      const response = await fetch(`${BACKEND_URL}/api/users`);
       if (!response.ok) throw new Error('Failed to fetch users');
       const data = await response.json();
       setUsers(data);
@@ -52,7 +72,7 @@ function App() {
     try {
       setLoading(true);
       setError('');
-      const response = await fetch('/api/echo', {
+      const response = await fetch(`${BACKEND_URL}/api/echo`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: echoInput })
@@ -71,6 +91,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Full Stack App 🚀</h1>
+        <div style={{ fontSize: '0.8rem', marginBottom: '1rem', color: '#aaa' }}>
+          Backend: {backendStatus}
+        </div>
         
         {error && <div className="error">{error}</div>}
         
