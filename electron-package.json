@@ -1,0 +1,50 @@
+{
+  "name": "fullstack-desktop-app",
+  "description": "Full Stack Desktop Application",
+  "homepage": "./",
+  "main": "public/electron.js",
+  "homepage-electron": "./",
+  "author": "Campus Tools",
+  "build": {
+    "appId": "com.campustools.fullstackapp",
+    "files": [
+      "build/**/*",
+      "backend/**/*",
+      "public/electron.js",
+      "public/preload.js",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Full Stack App"
+    }
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^latest",
+    "electron-is-dev": "^latest",
+    "concurrently": "^latest"
+  }
+}
