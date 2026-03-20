@@ -1,0 +1,91 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+section {
+  margin: 2rem;
+  padding: 1.5rem;
+  background-color: #3a3f47;
+  border-radius: 8px;
+  min-width: 400px;
+  max-width: 600px;
+}
+
+button {
+  background-color: #61dafb;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #282c34;
+  font-weight: bold;
+  margin: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #4fa8c5;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input {
+  padding: 0.75rem;
+  font-size: 1rem;
+  width: 80%;
+  max-width: 300px;
+  border: none;
+  border-radius: 4px;
+  margin: 0.5rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+li {
+  padding: 0.75rem;
+  background-color: #282c34;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+}
+
+.error {
+  background-color: #f77;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+p {
+  margin: 0.5rem 0;
+}
